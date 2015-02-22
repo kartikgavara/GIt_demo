@@ -1,0 +1,33 @@
+---
+title: "R_Practice"
+output: html_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+Reading data from TSV file and selecting three countries:
+
+```{r}
+df <-read.delim("~/Desktop/iplant_workshop/output/combined_gapMinder.tsv",sep="\t")
+new.data<-subset(df,country=="India"|country=="China"|country=="Albania")
+
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+library("ggplot2")
+library("reshape2")
+
+library("ggthemes")
+library("plyr")
+ggplot(data =new.data , aes(x=year, y=gdpPercap, color=country)) +
+  geom_point(size=4)+facet_grid(country~.)
+```
+
+There is a dip in GDP of Albania in around 1992-1993 when compared to India and China.
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
